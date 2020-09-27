@@ -1,0 +1,61 @@
+local dim=300;
+{
+  "dataset_reader": {
+    "type": "seqreader_word",
+    "source_token_indexers": {
+      "tokens": {
+        "type": "single_id"
+      }
+    }
+  },
+//  "train_data_path": "./data_1218/trans_train.pk",
+//  "validation_data_path": "./data_1218/trans_dev.pk",
+//  "train_data_path": "./data_1221/gen_train.pk",
+//  "validation_data_path": "./data_1221/gen_dev.pk",
+  "train_data_path": "../data/0831/gen_train.pk",
+  "validation_data_path": "../data/0831/gen_dev_with_bert.pk",
+  "test_data_path": "../data/0831/gen_test_with_bert.pk",
+  "evaluate_on_test": true,
+  "model": {
+    "type": "simple_seq2seq1",
+        "max_decoding_steps":64,
+    "source_embedder": {
+      "token_embedders": {
+        "tokens": {
+            "type": "embedding",
+            "embedding_dim": dim
+        }
+      }
+    },
+    "encoder": {
+      "type": "lstm",
+        "bidirectional": true,
+        "input_size": dim,
+        "hidden_size": dim,
+        "num_layers": 1,
+    },
+    "context_encoder":{
+      "type": "lstm",
+        "bidirectional": false,
+        "input_size": 2 * dim,
+        "hidden_size": 2 * dim,
+        "num_layers": 1
+}
+  },
+
+  "iterator": {
+    "type": "basic",
+    "batch_size": 16
+  },
+  "trainer": {
+  "optimizer": {
+        "type": "adam",
+        "lr": 0.001
+        },
+    "validation_metric": "+BLEU_avg",
+    "num_epochs": 100,
+    "patience": 5,
+ "num_serialized_models_to_keep": 1,
+    "cuda_device": 0,
+  }
+}

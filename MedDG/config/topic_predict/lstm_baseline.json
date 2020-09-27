@@ -1,0 +1,51 @@
+{
+  "dataset_reader": {
+    "type": "mds_reader",
+    "tokenizer": {
+        "word_splitter":"just_spaces"
+    },
+    "token_indexers": {
+      "tokens": {
+        "type": "single_id"
+      }
+    }
+  },
+  "train_data_path": "../data/0831/train.pk",
+  "validation_data_path": "../data/0831/dev.pk",
+  "test_data_path": "../data/0831/test.pk",
+  "evaluate_on_test": true,
+  "model": {
+    "type": "symptoms_predictor",
+    "text_field_embedder": {
+      "token_embedders": {
+        "tokens": {
+            "type": "embedding",
+            "embedding_dim": 256
+        }
+      }
+    },
+    "seq2vec_encoder": {
+      "type": "lstm",
+      "input_size": 256,
+      "hidden_size": 256,
+      "bidirectional": true,
+      "num_layers": 1
+    }
+  },
+
+  "iterator": {
+    "type": "basic",
+    "batch_size": 16
+  },
+  "trainer": {
+    "optimizer": {
+        "type": "adam",
+        "lr": 0.001
+    },
+    "num_epochs": 30,
+    "patience": 5,
+    "cuda_device": 0,
+    "num_serialized_models_to_keep": 1,
+    "validation_metric": "+f1"
+  }
+}

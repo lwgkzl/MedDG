@@ -1,0 +1,64 @@
+local bert_model = "../../BERT_MODELS/MTBERT/vocab.txt";
+local bert_archive = "../../BERT_MODELS/MTBERT";
+{
+    "dataset_reader": {
+        "type": "mds_reader",
+        "model": "hfl/MTBERT",
+        "tokenizer": {
+          "type":"word",
+          "word_splitter":{
+            "type":"bert-basic"
+            }
+        },
+        "token_indexers": {
+          "bert":{
+            "type":"bert-pretrained",
+            "pretrained_model": bert_model
+            }
+        },
+    },
+  "train_data_path": "../data/0831/train.pk",
+  "validation_data_path": "../data/0831/dev.pk",
+  "test_data_path": "../data/0831/test.pk",
+  "evaluate_on_test": true,
+
+    "model": {
+        "type": "symptoms_predictor",
+        "text_field_embedder": {
+            "allow_unmatched_keys": true,
+            "embedder_to_indexer_map": {
+                "bert": ["bert"],
+            },
+            "token_embedders": {
+                "bert": {
+                    "type": "bert-pretrained",
+                    "pretrained_model": bert_archive,
+                    "top_layer_only": true,
+                    "requires_grad": true,
+                }
+            }
+        },
+        "seq2vec_encoder": {
+           "type": "bert_pooler",
+           "pretrained_model": bert_archive,
+           "requires_grad": true
+        },
+        "dropout": 0.1
+    },
+    "iterator": {
+        "type": "basic",
+        "batch_size": 4,
+    },
+    "trainer": {
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.00002
+        },
+        "validation_metric": "+f1",
+        "num_serialized_models_to_keep": 1,
+        "num_epochs": 20,
+        "patience": 5,
+        "grad_norm": 20.0,
+        "cuda_device": [0,1,2,3],
+    }
+}
