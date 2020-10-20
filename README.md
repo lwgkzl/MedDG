@@ -7,11 +7,11 @@ This is the code for the following paper:
 *Wenge Liu, Jianheng Tang, Jinghui Qin, Lin Xu, Zhen Li, Xiaodan Liang; Arxiv*
 
 
-# Requirement
+### Requirement
 
     pip install allenlp==0.9
 
-# Usage
+### Usage
 
 For the task of topic prediction  (e.g. run the LSTM baseline):
 
