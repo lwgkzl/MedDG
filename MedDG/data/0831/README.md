@@ -1,4 +1,5 @@
-## Dataset address:
+## Dataset address:  
+Github has a file size limit, so we chose to use Google Drive to share our dataset!  
 
 https://drive.google.com/file/d/1ASb-iSOt_v1Uqx53Qezt99KXCffRxz2D/view?usp=sharing
 
