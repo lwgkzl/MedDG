@@ -26,3 +26,5 @@ For the task of response generation (e.g. run the seq2seq baseline):
 cd generation
 allennlp train ../config/generation/seq2seqattn.json --include-package seq2seq -s tmp/seq2seq1
 ```
+
+### Dataset (only train set)
