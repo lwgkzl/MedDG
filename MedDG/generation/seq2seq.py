@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time : 2020/5/9 21:51
-# @Author : kzl
-# @Site : 
-# @File : seq2seq.py
+
 from torch.nn.modules.rnn import LSTMCell
 import torch.nn.functional as F
 from torch.nn.modules.linear import Linear
@@ -58,7 +55,7 @@ class SimpleSeq2Seq(Model):
 
         self._encoder = encoder
 
-        self._encoder_output_dim = self._encoder.get_output_dim() # 512  要不把前两个都换成outfeater得了
+        self._encoder_output_dim = self._encoder.get_output_dim()
         self._decoder_output_dim = self._encoder_output_dim
         self._decoder_input_dim = target_embedding_dim
         self._attention = None
@@ -211,55 +208,6 @@ class SimpleSeq2Seq(Model):
         all_metrics.update({"dink2": self.dink2.get_metric(reset=reset)})
         # all_metrics.update({"topic_acc": self.topic_acc.get_metric(reset=reset)})
         return all_metrics
-
-
-'''
-dialogGPT：
-Bleu_1:  0.3457775170533667
-Bleu_4:  0.18097938960117962
-Meteor:  0.13840226859208324
-Nist_2:  0.38397650497977703
-Nist_4:  0.3742925078631661
-Dist_1:  0.005063316951813861
-Dist_2:  0.0992182376917439
-Entropy_4:  10.844785790605618
-Length:  20.62975894998107
-
-
-
-GPT2：
-Bleu_1:  0.3535794278227174
-Bleu_4:  0.18441626208646247
-Meteor:  0.1440791042608136
-Nist_2:  0.3948318088227058
-Nist_4:  0.38245943281720646
-Dist_1:  0.005509665570611675
-Dist_2:  0.12144123073017941
-Entropy_4:  11.468649504523361
-Length:  19.56169281898111
-
-seq2seq_loss   8:
-test_rec": 0.2075395216862586,
-  "test_acc": 0.1599000624609619,
-  "test_f1": 0.18063150467454578,
-  "test_BLEU_avg": 0.17898428160303037,
-  "test_BLEU1": 0.3411681138880664,
-  "test_dink1": 0.0009628643431125482,
-  "test_dink2": 0.002688172043010753
-
-seq2seq:
-"test_rec": 0.07599963895658453,
-  "test_acc": 0.13260886683990866,
-  "test_f1": 0.09662334681699515,
-  "test_BLEU_avg": 0.1039204491822017,
-  "test_BLEU1": 0.1991126587860221,
-  "test_dink1": 0.01936688317188617,
-  "test_dink2": 0.12037948447090646
-
-'''
-
-
-
 
 
 

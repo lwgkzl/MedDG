@@ -1,10 +1,10 @@
 import pickle
 from tqdm import tqdm
 
-with open('../data/0831/moban_dic.pk','rb') as f:
+with open('../data/moban_dic.pk','rb') as f:
     moban_dic = pickle.load(f)
 
-with open('../data/0831/gen_test_with_bert.pk','rb') as f:
+with open('../data/gen_test_with_bert.pk','rb') as f:
     test_dataset = pickle.load(f)
 
 def find_similary_key_subset(x):
@@ -52,7 +52,7 @@ bleu4 = NLTK_BLEU(ngram_weights=(0, 0, 0, 1))
 dist1 = Distinct1()
 dist2 = Distinct2()
 
-with open('../data/0831/160_last_topic2num.pk', 'rb') as f:
+with open('../data/160_last_topic2num.pk', 'rb') as f:
     topic2idx = pickle.load(f)
 
 moban_ans = []

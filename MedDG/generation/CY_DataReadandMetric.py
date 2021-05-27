@@ -54,7 +54,7 @@ class Seq2SeqDatasetReader(DatasetReader):
 
     @overrides
     def _read(self, file_path: str):
-        with open('../data/0831/160_last_topic2num.pk','rb') as f:
+        with open('../data/160_last_topic2num.pk','rb') as f:
             topic2num = pickle.load(f)
         num2topic = {k: v for v, k in topic2num.items()}
         # new_dialog.append({"history": copy.deepcopy(history), "next_sym": copy.deepcopy(xz),
@@ -243,7 +243,7 @@ class KD_Metric(Metric):
         self._pred_true = 0
         self._total_pred = 0
         self._total_true = 0
-        with open('../data/0831/new_cy_bii.pk', 'rb') as f:
+        with open('../data/new_cy_bii.pk', 'rb') as f:
             self.norm_dict = pickle.load(f)
 
     def reset(self) -> None:
