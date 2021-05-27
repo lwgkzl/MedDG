@@ -17,9 +17,9 @@ local bert_archive = "../../BERT_MODELS/chinese_wwm_ext";
             }
         },
     },
-  "train_data_path": "../data/0831/train.pk",
-  "validation_data_path": "../data/0831/dev.pk",
-  "test_data_path": "../data/0831/test.pk",
+  "train_data_path": "../data/train.pk",
+  "validation_data_path": "../data/dev.pk",
+  "test_data_path": "../data/test.pk",
   "evaluate_on_test": true,
 
     "model": {
