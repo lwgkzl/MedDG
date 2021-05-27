@@ -27,5 +27,5 @@ cd generation
 allennlp train ../config/generation/seq2seqattn.json --include-package seq2seq -s tmp/seq2seq1
 ```
 
-### Dataset (only train set)
-https://drive.google.com/file/d/1lQ53qEcg6ekaFGf-OFbhiYnd4S_Cgkvo/view?usp=sharing
+### Dataset
+https://drive.google.com/drive/folders/109WnXlNhmqttxYwb4EEscYGcA_-eq8Eg?usp=sharing
