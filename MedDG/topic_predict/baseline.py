@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time : 2020/4/15 17:17
-# @Author : kzl
-# @Site : 
-# @File : basline.py
+
 from typing import List, Dict
 import tempfile
 import torch
@@ -67,20 +64,15 @@ class TextClassificationTxtReader(DatasetReader):
                 now_topic = []
                 his_topic = []
                 for sen in dialog:
-                    aa = sen['sym']+sen['prop']+sen['check']+sen['diease']+sen['medical']
+                    aa = sen['Symptom']+sen['Attribute']+sen['Examination']+sen['Disease']+sen['Medicine']
                     if len(aa) > 0:
-                        if len(history) > 0 and sen['id'] == 'doc':
+                        if len(history) > 0 and sen['id'] == 'Doctor':
                             new_dialog.append({"history": copy.deepcopy(history), "next_sym": copy.deepcopy(aa), 'now_topic': copy.deepcopy(now_topic)})
                         now_topic.extend(aa)
                         his_topic.extend(aa)
-                    history.append(sen['sentence'])
+                    history.append(sen['Sentence'])
                 for dic in new_dialog:
                     future = copy.deepcopy(his_topic[len(dic['now_topic']):])
-                    # if torch.rand(1).item()<0.01:
-                    #     print("his_topic", his_topic)
-                    #     print('now_topic: ', dic['now_topic'])
-                    #     print('future" ', future)
-                    #     print("next_sym: ", dic['next_sym'])
                     dic['future'] = [topic2num[i] for i in future]
                     dic['next_sym'] = [topic2num[i] for i in dic['next_sym']]
                     yield self.text_to_instance(dic)
@@ -131,7 +123,7 @@ class MyModel(Model):
         self.sym_size = topic_num
         self.hidden_dim = self.vec_encoder.get_output_dim()
         self.linear_class = torch.nn.Linear(self.hidden_dim, self.sym_size)
-        self.dim = [12, 62, 4, 40, 62]
+        self.dim = [12, 62, 4, 20, 62]
 
         self.true_list = [Average() for i in range(5)]
         self.pre_total = [Average() for i in range(5)]

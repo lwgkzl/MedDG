@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time : 2020/6/18 14:11
-# @Author : kzl
-# @Site : 
-# @File : binary_bert.py
 
 from allennlp.data.tokenizers.word_tokenizer import WordTokenizer
 from allennlp.data.tokenizers import Token, Tokenizer
@@ -56,14 +52,13 @@ class TextClassificationTxtReader(DatasetReader):
                 now_topic = []
                 his_topic = []
                 for sen in dialog:
-                    aa = sen['sym'] + sen['prop'] + sen['check'] + sen['diease'] + sen['medical']
+                    aa = sen['Symptom']+sen['Attribute']+sen['Examination']+sen['Disease']+sen['Medicine']
                     if len(aa) > 0:
-                        if len(history) > 0 and sen['id'] == 'doc':
-                            new_dialog.append({"history": copy.deepcopy(history), "next_sym": copy.deepcopy(aa),
-                                               'now_topic': copy.deepcopy(now_topic)})
+                        if len(history) > 0 and sen['id'] == 'Doctor':
+                            new_dialog.append({"history": copy.deepcopy(history), "next_sym": copy.deepcopy(aa), 'now_topic': copy.deepcopy(now_topic)})
                         now_topic.extend(aa)
                         his_topic.extend(aa)
-                    history.append(sen['sentence'])
+                    history.append(sen['Sentence'])
                 for dic in new_dialog:
                     future = copy.deepcopy(his_topic[len(dic['now_topic']):])
                     dic['future'] = [topic2num[i] for i in future]
