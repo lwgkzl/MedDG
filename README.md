@@ -2,9 +2,9 @@
 
 This is the code for the following paper:
 
-[MedDG: A Large-scale Medical Consultation Dataset for Building Medical Dialogue System](https://arxiv.org/pdf/2010.07497)
+[MedDG: an entity-centric medical consultation dataset for entity-aware medical dialogue generation](https://link.springer.com/chapter/10.1007/978-3-031-17120-8_35)
 
-*Wenge Liu, Jianheng Tang, Jinghui Qin, Lin Xu, Zhen Li, Xiaodan Liang; Arxiv*
+*Wenge Liu, Jianheng Tang, Yi Cheng, Wenjie Li, Yefeng Zheng, Xiaodan Liang;*
 
 
 ### Requirement
